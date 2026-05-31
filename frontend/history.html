@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BhashaTranslate - Translation History & Favorites</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/history.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="navLogo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+        </svg>
+        <span>BhashaTranslate</span>
+      </a>
+      
+      <!-- Nav Menu Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item" id="navDashboard">Dashboard</a>
+        <a href="history.html" class="nav-item active" id="navHistory">History</a>
+        <a href="settings.html" class="nav-item" id="navSettings">Settings</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Light/Dark Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.07 7.07l-2.828-2.828z" />
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <button class="mobile-nav-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="main-layout" role="main">
+    
+    <!-- HEADER BAR -->
+    <header class="history-header">
+      <div class="history-title-container">
+        <h1 class="history-title">History & Favorites</h1>
+        <p class="history-subtitle">View and manage your previous translation records and favorites cached offline.</p>
+      </div>
+      
+      <!-- CONTROLS & CONTROLLER -->
+      <div class="history-controls">
+        <!-- Search bar -->
+        <div class="search-container">
+          <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </span>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search saved phrases..." aria-label="Search translations">
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="tab-filter" role="tablist">
+          <button class="tab-btn active" id="tabAll" role="tab" aria-selected="true">
+            <span>All History</span>
+          </button>
+          <button class="tab-btn" id="tabFavorites" role="tab" aria-selected="false">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+            <span>Favorites</span>
+          </button>
+        </div>
+
+        <!-- Clear all -->
+        <button class="clear-all-btn" id="clearHistoryBtn" aria-label="Clear translation history">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+          <span>Clear All</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- TRANSLATIONS LIST GRID -->
+    <section class="history-grid" id="historyGrid" aria-label="Saved translations list">
+      <!-- Populated dynamically via JS -->
+    </section>
+
+    <!-- EMPTY STATE VIEW -->
+    <div class="empty-state" id="emptyState" role="status">
+      <div class="empty-state-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      </div>
+      <h2 class="empty-state-title" id="emptyStateTitle">No translations found</h2>
+      <p class="empty-state-text" id="emptyStateText">Phrases you translate on the dashboard will appear here for easy access.</p>
+      <a href="index.html" class="empty-state-btn">Go to Dashboard</a>
+    </div>
+
+  </main>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-text">© 2026 BhashaTranslate. Built with modern UI/UX standards. Zero backend data transfers.</p>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Dashboard</a>
+      <a href="history.html" class="footer-link">History & Favorites</a>
+      <a href="settings.html" class="footer-link">Settings</a>
+    </div>
+  </footer>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/theme.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/favorites.js"></script>
+  <!-- Dedicated app logic for driving the history page -->
+  <script>
+    // Global toast function placeholder for speech.js / UI error messages
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+      if (!container) return;
+
+      const toast = document.createElement("div");
+      toast.className = `toast toast-${type}`;
+      
+      let iconSvg = '';
+      if (type === 'success') {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+      } else if (type === 'error') {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+      } else {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+      }
+
+      toast.innerHTML = `
+        <div class="toast-icon">${iconSvg}</div>
+        <div class="toast-message">${message}</div>
+      `;
+
+      container.appendChild(toast);
+
+      // Auto remove
+      setTimeout(() => {
+        toast.classList.add("removing");
+        toast.addEventListener("animationend", () => {
+          toast.remove();
+        });
+      }, 3000);
+    }
+
+    // Language code to full names mappings
+    const LANG_NAME_LOOKUP = {
+      "en": "English", "hi": "Hindi", "te": "Telugu", "ta": "Tamil", "kn": "Kannada",
+      "ml": "Malayalam", "mr": "Marathi", "bn": "Bengali", "gu": "Gujarati", "pa": "Punjabi"
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Mobile Nav hamburger functionality
+      const mobileBtn = document.getElementById("mobileMenuBtn");
+      const navLinks = document.getElementById("navLinks");
+      
+      mobileBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("mobile-open");
+      });
+
+      // Filter tabs switching state
+      const tabAll = document.getElementById("tabAll");
+      const tabFavorites = document.getElementById("tabFavorites");
+      let activeFilter = "all"; // 'all' or 'favorites'
+
+      tabAll.addEventListener("click", () => {
+        tabAll.classList.add("active");
+        tabAll.setAttribute("aria-selected", "true");
+        tabFavorites.classList.remove("active");
+        tabFavorites.setAttribute("aria-selected", "false");
+        activeFilter = "all";
+        renderHistoryList();
+      });
+
+      tabFavorites.addEventListener("click", () => {
+        tabFavorites.classList.add("active");
+        tabFavorites.setAttribute("aria-selected", "true");
+        tabAll.classList.remove("active");
+        tabAll.setAttribute("aria-selected", "false");
+        activeFilter = "favorites";
+        renderHistoryList();
+      });
+
+      // Search bar filter handler
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", () => {
+        renderHistoryList();
+      });
+
+      // Clear all history list
+      const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+      clearHistoryBtn.addEventListener("click", () => {
+        const isFavMode = activeFilter === "favorites";
+        const confirmMsg = isFavMode 
+          ? "Are you sure you want to clear your favorites? (This removes their starred state in your history)"
+          : "Are you sure you want to delete all translation history?";
+        
+        if (confirm(confirmMsg)) {
+          if (isFavMode) {
+            // Unstar all favorites in history
+            const history = getHistory();
+            history.forEach(item => item.favorite = false);
+            saveHistory(history);
+            showToast("Cleared favorites", "info");
+          } else {
+            // Entire history wiped
+            clearHistory(false);
+            showToast("Cleared all history records", "success");
+          }
+          renderHistoryList();
+        }
+      });
+
+      // Render on load
+      renderHistoryList();
+
+      // Core history rendering engine
+      function renderHistoryList() {
+        const historyGrid = document.getElementById("historyGrid");
+        const emptyState = document.getElementById("emptyState");
+        const searchVal = searchInput.value.toLowerCase().trim();
+        
+        // Load items from local storage
+        let items = activeFilter === "favorites" ? getFavorites() : getHistory();
+
+        // Apply keyword searching filter
+        if (searchVal) {
+          items = items.filter(item => 
+            item.sourceText.toLowerCase().includes(searchVal) ||
+            item.translatedText.toLowerCase().includes(searchVal) ||
+            (LANG_NAME_LOOKUP[item.sourceLang] || "").toLowerCase().includes(searchVal) ||
+            (LANG_NAME_LOOKUP[item.targetLang] || "").toLowerCase().includes(searchVal)
+          );
+        }
+
+        // Handle empty state displays
+        if (items.length === 0) {
+          historyGrid.style.display = "none";
+          emptyState.style.display = "flex";
+          
+          const title = document.getElementById("emptyStateTitle");
+          const text = document.getElementById("emptyStateText");
+          
+          if (searchVal) {
+            title.textContent = "No matches found";
+            text.textContent = `No translations matched the search keyword: "${searchVal}"`;
+          } else if (activeFilter === "favorites") {
+            title.textContent = "No favorites starred";
+            text.textContent = "Tap the star icon on translation results to save key phrases here.";
+          } else {
+            title.textContent = "Your history is clean";
+            text.textContent = "Phrases you translate on the dashboard will appear here for easy access.";
+          }
+          return;
+        }
+
+        // Hide empty state and show grid
+        emptyState.style.display = "none";
+        historyGrid.style.display = "grid";
+        historyGrid.innerHTML = "";
+
+        // Build list cards
+        items.forEach(item => {
+          const card = document.createElement("div");
+          card.className = "history-item-card fade-in";
+          
+          // Formulate relative formatted time
+          const date = new Date(item.timestamp);
+          const timeString = date.toLocaleDateString(undefined, { 
+            month: 'short', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit' 
+          });
+
+          const isFav = item.favorite;
+          const sourceFullName = LANG_NAME_LOOKUP[item.sourceLang] || item.sourceLang.toUpperCase();
+          const targetFullName = LANG_NAME_LOOKUP[item.targetLang] || item.targetLang.toUpperCase();
+
+          card.innerHTML = `
+            <!-- Source block -->
+            <div class="history-card-column">
+              <span class="history-lang-badge">${sourceFullName}</span>
+              <p class="history-text">${escapeHTML(item.sourceText)}</p>
+            </div>
+            
+            <!-- Target block -->
+            <div class="history-card-column">
+              <span class="history-lang-badge" style="background-color:rgba(139, 92, 246, 0.15); color:#8b5cf6;">${targetFullName}</span>
+              <p class="history-translation">${escapeHTML(item.translatedText)}</p>
+            </div>
+
+            <!-- Actions panel -->
+            <div class="history-item-actions">
+              <span class="history-timestamp">${timeString}</span>
+              <div class="history-action-buttons">
+                <!-- Toggle favorite button -->
+                <button class="btn-icon ${isFav ? 'active-favorite' : ''}" data-id="${item.id}" data-action="favorite" data-tooltip="${isFav ? 'Remove Favorite' : 'Star Favorite'}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                  </svg>
+                </button>
+                
+                <!-- Listen translation audio -->
+                <button class="btn-icon" data-id="${item.id}" data-action="speak" data-tooltip="Listen text">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  </svg>
+                </button>
+
+                <!-- Copy translation to clipboard -->
+                <button class="btn-icon" data-id="${item.id}" data-action="copy" data-tooltip="Copy translated text">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                  </svg>
+                </button>
+
+                <!-- Delete record -->
+                <button class="btn-icon" data-id="${item.id}" data-action="delete" data-tooltip="Delete record">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          `;
+          
+          historyGrid.appendChild(card);
+        });
+
+        // Set up event listeners on item buttons
+        setupCardActionListeners(items);
+      }
+
+      // Card click event delegator
+      function setupCardActionListeners(items) {
+        const grid = document.getElementById("historyGrid");
+        grid.querySelectorAll(".btn-icon").forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            const button = e.currentTarget;
+            const id = button.getAttribute("data-id");
+            const action = button.getAttribute("data-action");
+            const item = items.find(i => i.id === id);
+
+            if (!item) return;
+
+            if (action === "favorite") {
+              const newStatus = toggleFavorite(id);
+              button.classList.toggle("active-favorite", newStatus);
+              button.setAttribute("data-tooltip", newStatus ? "Remove Favorite" : "Star Favorite");
+              showToast(newStatus ? "Added to favorites" : "Removed from favorites", "success");
+              
+              // If we are currently in favorites tab, re-render immediately to remove unstarred item
+              if (activeFilter === "favorites") {
+                renderHistoryList();
+              }
+            }
+            else if (action === "copy") {
+              navigator.clipboard.writeText(item.translatedText)
+                .then(() => showToast("Copied translation to clipboard!", "success"))
+                .catch(() => showToast("Failed to copy text", "error"));
+            }
+            else if (action === "speak") {
+              speakText(item.translatedText, item.targetLang);
+              showToast("Speaking translation...", "info");
+            }
+            else if (action === "delete") {
+              deleteHistoryItem(id);
+              showToast("Record deleted", "info");
+              renderHistoryList();
+            }
+          });
+        });
+      }
+
+      // XSS Protection Helper
+      function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+          tag => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+          }[tag] || tag)
+        );
+      }
+    });
+  </script>
+</body>
+</html>

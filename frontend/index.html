@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BhashaTranslate - Modern Language Translator</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="navLogo">
+        <!-- Logo SVG - represents translation (chat bubbles / character switch) -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+        </svg>
+        <span>BhashaTranslate</span>
+      </a>
+      
+      <!-- Nav Menu Links (Desktop) -->
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item active" id="navDashboard">Dashboard</a>
+        <a href="history.html" class="nav-item" id="navHistory">History</a>
+        <a href="settings.html" class="nav-item" id="navSettings">Settings</a>
+      </div>
+
+      <!-- Actions (Theme toggle + Mobile menu button) -->
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Light/Dark Theme">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.07 7.07l-2.828-2.828z" />
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- Mobile Nav Toggle button -->
+        <button class="mobile-nav-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="main-layout" role="main">
+    <!-- Header Summary -->
+    <header class="dashboard-header">
+      <h1 class="dashboard-title">Break Language Barriers</h1>
+      <p class="dashboard-subtitle">Translate text seamlessly between English and 9 regional Indian languages with real voice synthesis and recognition.</p>
+    </header>
+
+    <!-- TRANSLATOR WORKSPACE -->
+    <section class="translator-container">
+      
+      <!-- Source Language Box (Input) -->
+      <article class="translator-card" id="sourceCard">
+        <header class="card-header">
+          <label for="sourceLangSelect" style="display:none">Source Language</label>
+          <div class="select-wrapper">
+            <select class="lang-select" id="sourceLangSelect">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+        </header>
+
+        <div class="card-body">
+          <textarea class="translate-textarea" id="sourceTextarea" placeholder="Type or paste text to translate..." maxlength="5000" aria-label="Source text to translate"></textarea>
+        </div>
+
+        <footer class="card-footer">
+          <div class="control-buttons">
+            <!-- Voice Input Mic Button -->
+            <button class="btn-icon" id="voiceInputBtn" data-tooltip="Voice Input (Speech-to-Text)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" x2="12" y1="19" y2="22"/>
+              </svg>
+            </button>
+            
+            <!-- Voice Waveform (Active when listening) -->
+            <div class="speech-wave" id="speechWave" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          
+          <!-- Character Counter -->
+          <div class="char-counter" id="charCount" aria-live="polite">0 / 5000</div>
+        </footer>
+      </article>
+
+      <!-- MIDDLE COLUMN (Swap button) -->
+      <div class="swap-container">
+        <button class="swap-btn" id="swapLangBtn" aria-label="Swap source and target languages">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Target Language Box (Output) -->
+      <article class="translator-card" id="targetCard">
+        <!-- Spinner Loader Overlay -->
+        <div class="loading-overlay" id="loadingOverlay">
+          <div class="spinner" aria-hidden="true"></div>
+          <span class="loading-text">Translating...</span>
+        </div>
+
+        <header class="card-header">
+          <label for="targetLangSelect" style="display:none">Target Language</label>
+          <div class="select-wrapper">
+            <select class="lang-select" id="targetLangSelect">
+              <!-- Dynamically populated -->
+            </select>
+          </div>
+        </header>
+
+        <div class="card-body">
+          <textarea class="translate-textarea translation-result" id="targetTextarea" placeholder="Translation will appear here..." readonly aria-label="Translated output text"></textarea>
+        </div>
+
+        <footer class="card-footer">
+          <div class="control-buttons">
+            <!-- Vocalize / Speak Button -->
+            <button class="btn-icon" id="voiceOutputBtn" data-tooltip="Voice Output (Text-to-Speech)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </button>
+
+            <!-- Copy to Clipboard Button -->
+            <button class="btn-icon" id="copyTextBtn" data-tooltip="Copy translation">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Add to Favorites Button -->
+          <button class="btn-icon" id="favoriteBtn" data-tooltip="Save to Favorites" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </button>
+        </footer>
+      </article>
+
+    </section>
+
+    <!-- TRANSLATE BUTTON -->
+    <div class="action-container">
+      <button class="translate-btn" id="translateBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span>Translate Text</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <p class="footer-text">© 2026 BhashaTranslate. Built with modern UI/UX standards. Zero backend data transfers.</p>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Dashboard</a>
+      <a href="history.html" class="footer-link">History & Favorites</a>
+      <a href="settings.html" class="footer-link">Settings</a>
+    </div>
+  </footer>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/theme.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/speech.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
