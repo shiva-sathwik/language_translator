@@ -114,32 +114,43 @@ async function translateText(text, sourceLang, targetLang) {
     return getSimulatedTranslation(text, sourceLang, targetLang);
   }
 
-  // 4. Call Public MyMemory Translation API with a timeout
+  // 4. Call Local Translation Backend API with a timeout
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000); // 6s timeout
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout
 
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
-    const response = await fetch(url, { signal: controller.signal });
+    // Automatically resolve backend URL depending on whether the page is run from local file or web server
+    const isLocalFile = window.location.protocol === 'file:';
+    const backendHost = isLocalFile ? 'http://localhost:5000' : '';
+    const url = `${backendHost}/api/translate`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        text: text,
+        source: sourceLang,
+        target: targetLang
+      }),
+      signal: controller.signal
+    });
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-      throw new Error("API response error");
+      const errData = await response.json().catch(() => ({}));
+      throw new Error(errData.error || `HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    if (data.responseData && data.responseData.translatedText) {
-      // MyMemory API sometimes returns "PLEASE BUY A KEY..." if rate limited
-      const resultText = data.responseData.translatedText;
-      if (resultText.toUpperCase().includes("MYMEMORY WARNING")) {
-        return getSimulatedTranslation(text, sourceLang, targetLang);
-      }
-      return resultText;
+    if (data.translatedText) {
+      return data.translatedText;
     } else {
-      throw new Error("Invalid response format");
+      throw new Error("Invalid response format from backend");
     }
   } catch (error) {
-    console.warn("MyMemory API failed, falling back to simulator:", error.message);
+    console.warn("Backend translation failed, falling back to simulator:", error.message);
     // 5. Fallback to Simulated Mock translation
     return getSimulatedTranslation(text, sourceLang, targetLang);
   }
