@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BhashaTranslate - Preferences & Settings</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="navLogo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+        </svg>
+        <span>BhashaTranslate</span>
+      </a>
+      
+      <!-- Nav Menu Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-item" id="navDashboard">Dashboard</a>
+        <a href="history.html" class="nav-item" id="navHistory">History</a>
+        <a href="settings.html" class="nav-item active" id="navSettings">Settings</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Light/Dark Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.07 7.07l-2.828-2.828z" />
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <button class="mobile-nav-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN LAYOUT -->
+  <main class="main-layout" role="main">
+    
+    <!-- Title Section -->
+    <header class="dashboard-header" style="margin-bottom: 2rem;">
+      <h1 class="dashboard-title" style="font-size: 2.2rem;">Settings & Preferences</h1>
+      <p class="dashboard-subtitle">Adjust translator options, control Web Speech rate, and clear saved records.</p>
+    </header>
+
+    <!-- SETTINGS PANEL GRID -->
+    <section class="settings-grid">
+      
+      <!-- Card 1: Default Translation Preferences -->
+      <article class="settings-card fade-in">
+        <h2 class="settings-card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 7.37 16.5 2.421 18.1" />
+          </svg>
+          <span>Translation Preferences</span>
+        </h2>
+        
+        <!-- Source language choice -->
+        <div class="settings-group">
+          <div class="settings-label-container">
+            <label for="defaultSourceSelect" class="settings-label">Default Input Language</label>
+            <span class="settings-desc">Starting language when opening the app.</span>
+          </div>
+          <div class="settings-control settings-select-wrapper">
+            <select class="settings-select" id="defaultSourceSelect">
+              <!-- Populated dynamically via JS -->
+            </select>
+          </div>
+        </div>
+
+        <!-- Target language choice -->
+        <div class="settings-group">
+          <div class="settings-label-container">
+            <label for="defaultTargetSelect" class="settings-label">Default Output Language</label>
+            <span class="settings-desc">Target language when opening the app.</span>
+          </div>
+          <div class="settings-control settings-select-wrapper">
+            <select class="settings-select" id="defaultTargetSelect">
+              <!-- Populated dynamically via JS -->
+            </select>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Voice Output Pitch/Speed -->
+      <article class="settings-card fade-in" style="animation-delay: 0.1s;">
+        <h2 class="settings-card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+          <span>Speech Parameters (TTS)</span>
+        </h2>
+
+        <!-- Speed / Rate range -->
+        <div class="settings-group">
+          <div class="settings-label-container">
+            <label for="speechRateSlider" class="settings-label">Voice Reading Speed</label>
+            <span class="settings-desc">Adjust the speaking speed (rate) of Text-to-Speech synthesis.</span>
+          </div>
+          <div class="settings-control range-slider-container">
+            <input type="range" class="range-slider" id="speechRateSlider" min="0.5" max="2.0" step="0.1" value="1.0" aria-label="Speech rate speed">
+            <span class="slider-value" id="speechRateVal">1.0x</span>
+          </div>
+        </div>
+
+        <!-- Pitch range -->
+        <div class="settings-group">
+          <div class="settings-label-container">
+            <label for="speechPitchSlider" class="settings-label">Voice Pitch Accent</label>
+            <span class="settings-desc">Adjust the depth or tone frequency (pitch) of the voice output.</span>
+          </div>
+          <div class="settings-control range-slider-container">
+            <input type="range" class="range-slider" id="speechPitchSlider" min="0.5" max="2.0" step="0.1" value="1.0" aria-label="Speech pitch value">
+            <span class="slider-value" id="speechPitchVal">1.0x</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Feature Toggles -->
+      <article class="settings-card fade-in" style="animation-delay: 0.2s;">
+        <h2 class="settings-card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+          </svg>
+          <span>Feature Configurations</span>
+        </h2>
+
+        <!-- Autosave toggle -->
+        <div class="settings-group" style="flex-direction: row; justify-content: space-between; align-items: center;">
+          <div style="flex:1; padding-right:1rem;">
+            <span class="settings-label">Auto-save history</span>
+            <p class="settings-desc">Automatically add successful translations into your history cache.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="autoSaveToggle" checked>
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+
+        <!-- Offline mockup toggle -->
+        <div class="settings-group" style="flex-direction: row; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+          <div style="flex:1; padding-right:1rem;">
+            <span class="settings-label">Offline Mock Simulator Only</span>
+            <p class="settings-desc">Force app to skip internet API requests and rely strictly on local mock algorithms.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="offlineModeToggle">
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+      </article>
+
+      <!-- Card 4: Danger Zone -->
+      <article class="settings-card danger-card fade-in" style="animation-delay: 0.3s;">
+        <h2 class="settings-card-title danger-card-title">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span>Danger Zone</span>
+        </h2>
+        <div class="settings-group">
+          <p class="settings-desc" style="color: var(--text-color); font-weight: 500;">Purging application data deletes all local files metadata, history logs, stars/favorites, and configuration preferences from this browser.</p>
+          <button class="btn-danger" id="purgeDataBtn" aria-label="Purge all translation data and reset settings">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            <span>Reset App & Purge Storage</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- App Info Block -->
+      <article class="settings-card fade-in" style="animation-delay: 0.4s; background: transparent; border-style: dashed; box-shadow: none;">
+        <h2 class="settings-card-title" style="border:none; padding:0;">Application Metadata</h2>
+        <div class="info-row">
+          <span class="info-name">Application Name</span>
+          <span class="info-val">BhashaTranslate</span>
+        </div>
+        <div class="info-row" style="border-top:1px solid var(--border-color); padding-top:0.5rem; margin-top:0.25rem;">
+          <span class="info-name">Client Engine Version</span>
+          <span class="info-val">1.0.0 (Production Frontend)</span>
+        </div>
+        <div class="info-row" style="border-top:1px solid var(--border-color); padding-top:0.5rem; margin-top:0.25rem;">
+          <span class="info-name">Supported Regional Locales</span>
+          <span class="info-val">English + 9 Indian Scripts</span>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-text">© 2026 BhashaTranslate. Built with modern UI/UX standards. Zero backend data transfers.</p>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Dashboard</a>
+      <a href="history.html" class="footer-link">History & Favorites</a>
+      <a href="settings.html" class="footer-link">Settings</a>
+    </div>
+  </footer>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/theme.js"></script>
+  <script src="js/settings.js"></script>
+  <!-- Dedicated script for binding settings fields -->
+  <script>
+    // Toast notifications helper
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+      if (!container) return;
+
+      const toast = document.createElement("div");
+      toast.className = `toast toast-${type}`;
+      
+      let iconSvg = '';
+      if (type === 'success') {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+      } else if (type === 'error') {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+      } else {
+        iconSvg = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+      }
+
+      toast.innerHTML = `
+        <div class="toast-icon">${iconSvg}</div>
+        <div class="toast-message">${message}</div>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add("removing");
+        toast.addEventListener("animationend", () => {
+          toast.remove();
+        });
+      }, 3000);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Mobile Nav Toggle
+      const mobileBtn = document.getElementById("mobileMenuBtn");
+      const navLinks = document.getElementById("navLinks");
+      mobileBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("mobile-open");
+      });
+
+      // Load Configs
+      const currentSettings = getSettings();
+      
+      const sourceSelect = document.getElementById("defaultSourceSelect");
+      const targetSelect = document.getElementById("defaultTargetSelect");
+      
+      const rateSlider = document.getElementById("speechRateSlider");
+      const rateVal = document.getElementById("speechRateVal");
+      
+      const pitchSlider = document.getElementById("speechPitchSlider");
+      const pitchVal = document.getElementById("speechPitchVal");
+      
+      const autoSaveToggle = document.getElementById("autoSaveToggle");
+      const offlineModeToggle = document.getElementById("offlineModeToggle");
+      
+      const purgeBtn = document.getElementById("purgeDataBtn");
+
+      // Fetch languages array from languages.json and populate selects
+      fetch("data/languages.json")
+        .then(res => res.json())
+        .then(languages => {
+          // Populate default selects
+          languages.forEach(lang => {
+            const optSource = document.createElement("option");
+            optSource.value = lang.code;
+            optSource.textContent = `${lang.name} (${lang.nativeName})`;
+            if (lang.code === currentSettings.defaultSourceLang) {
+              optSource.selected = true;
+            }
+            sourceSelect.appendChild(optSource);
+
+            const optTarget = document.createElement("option");
+            optTarget.value = lang.code;
+            optTarget.textContent = `${lang.name} (${lang.nativeName})`;
+            if (lang.code === currentSettings.defaultTargetLang) {
+              optTarget.selected = true;
+            }
+            targetSelect.appendChild(optTarget);
+          });
+        })
+        .catch(err => {
+          console.error("Failed to load languages list inside settings page:", err);
+          showToast("Failed to fetch languages configuration list", "error");
+        });
+
+      // Bind slider states
+      rateSlider.value = currentSettings.speechRate;
+      rateVal.textContent = `${currentSettings.speechRate.toFixed(1)}x`;
+      
+      pitchSlider.value = currentSettings.speechPitch;
+      pitchVal.textContent = `${currentSettings.speechPitch.toFixed(1)}x`;
+
+      autoSaveToggle.checked = currentSettings.autoSave;
+      offlineModeToggle.checked = currentSettings.offlineMode;
+
+      // Event listeners for updates
+      sourceSelect.addEventListener("change", (e) => {
+        const settings = getSettings();
+        settings.defaultSourceLang = e.target.value;
+        saveSettings(settings);
+        showToast("Default input language updated", "success");
+      });
+
+      targetSelect.addEventListener("change", (e) => {
+        const settings = getSettings();
+        settings.defaultTargetLang = e.target.value;
+        saveSettings(settings);
+        showToast("Default output language updated", "success");
+      });
+
+      rateSlider.addEventListener("input", (e) => {
+        const val = parseFloat(e.target.value);
+        rateVal.textContent = `${val.toFixed(1)}x`;
+        
+        const settings = getSettings();
+        settings.speechRate = val;
+        saveSettings(settings);
+      });
+
+      pitchSlider.addEventListener("input", (e) => {
+        const val = parseFloat(e.target.value);
+        pitchVal.textContent = `${val.toFixed(1)}x`;
+        
+        const settings = getSettings();
+        settings.speechPitch = val;
+        saveSettings(settings);
+      });
+
+      autoSaveToggle.addEventListener("change", (e) => {
+        const settings = getSettings();
+        settings.autoSave = e.target.checked;
+        saveSettings(settings);
+        showToast(`Auto-save ${e.target.checked ? 'enabled' : 'disabled'}`, "info");
+      });
+
+      offlineModeToggle.addEventListener("change", (e) => {
+        const settings = getSettings();
+        settings.offlineMode = e.target.checked;
+        saveSettings(settings);
+        showToast(`Offline simulation mode ${e.target.checked ? 'activated' : 'deactivated'}`, "info");
+      });
+
+      // Purge all data
+      purgeBtn.addEventListener("click", () => {
+        if (confirm("CRITICAL WARNING: This deletes all settings, history logs, stars, and theme preferences from this browser. This cannot be undone. Do you wish to proceed?")) {
+          purgeAllApplicationData();
+          showToast("All local application storage cleared. Reloading page...", "error");
+          
+          // Clear current form elements visually
+          rateSlider.value = 1.0;
+          rateVal.textContent = "1.0x";
+          pitchSlider.value = 1.0;
+          pitchVal.textContent = "1.0x";
+          autoSaveToggle.checked = true;
+          offlineModeToggle.checked = false;
+          
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
